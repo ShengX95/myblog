@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>blog list</title>
+    {% load staticfiles %}
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link href="{% static 'myblog/bootstrap.min.css' %}" rel="stylesheet">
+    <script src="{% static 'myblog/jquery-2.2.2.js' %}" type="text/javascript"></script>
+    <script src="{% static 'myblog/bootstrap.min.js' %}" type="text/javascript"></script>
+</head>
+<body>
+<div class="container">
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{% url 'index:index'%}">ReleaseMySoul</a>
+        </div>
+        <div>
+            <ul class="nav navbar-nav">
+                <li><a href="{% url 'index:index' %}">首页</a> </li>
+                <li><a href="{% url 'information:index' %}">资料</a> </li>
+                <li class="active"><a href="{% url 'blog:index' %}">BLOG</a> </li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            {% for blog in blogs %}
+                <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4><a  href="{% url 'blog:detail' blog.id %}">{{ blog.caption }}</a></h4>
+                    <small>{{ blog.publish_time.year }},{{ blog.publish_time.month }}月{{ blog.publish_time.day }} by {{ blog.author.name }}</small>
+                </div>
+                <div class="panel-body">
+                    <p>{{ blog.content }}</p>
+                </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+</div>
+</body>
+</html>
