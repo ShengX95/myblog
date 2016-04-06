@@ -14,7 +14,7 @@ class Tag(models.Model):
 
 class Classification(models.Model):
     name = models.CharField(max_length=20)
-
+    english_name = models.CharField(max_length=20)
     def __unicode__(self):
         return self.name
 
